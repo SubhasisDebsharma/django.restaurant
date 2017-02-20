@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!-- 
+
+Grill Template 
+
+http://www.templatemo.com/free-website-templates/417-grill
+
+-->
+    <head>
+        <meta charset="utf-8">
+        <title>Products - Grill Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        
+        <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>-->
+
+        <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <link rel="stylesheet" href="/static/css/font-awesome.css">
+        <link rel="stylesheet" href="/static/css/templatemo_style.css">
+        <link rel="stylesheet" href="/static/css/myorders.css">
+
+        <script src="/static/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+
+            <header>
+                <div id="main-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="logo">
+                                    <a href="#"><img src="/static/images/logo.png" title="Grill Template" alt="Grill Website Template" ></a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="main-menu">
+                                    <ul>
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="/Order">Order Online</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="checkout-container">
+                                    <a class="my-orders" href="/Order/MyOrders/">Refresh</a>
+                                    <a class="logout" href="/User/Logout/">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uname">{{request.session.username}}</div>
+            </header>
+
+            <div id="products-post">
+                <div class="container">
+                    <div class="row" id="Container">
+                        <h1>My Orders</h1>
+                        <br><br>
+                        <div class="table-responsive table-orders">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Order Details</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for items in itemsPerOrder %}
+                                    <tr>
+                                        <td><span class="serial-no">{{ forloop.counter }}</span></td>
+                                        <td>
+                                            <div class="table-responsive table-order-items">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Order Item</th>
+                                                            <th>Quantity</th>
+                                                            <th>Price</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for item in items %}
+                                                        <tr>
+                                                            <td><span class="order-item">{{ item.menuid.menu_name }}</span></td>
+                                                            <td><span class="quantity">{{ item.quantity}}</span></td>
+                                                            <td><span class="price">₹ {{ item.price}}</span></td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                        {% for item in items|slice:"1" %}
+                                        <td><span class="status">{{item.orderid.get_status_display}}</span></td>
+                                        {% endfor %}
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+			<footer>
+                <div class="container">
+                    <div class="top-footer">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="subscribe-form">
+                                    <span>Get in touch with us</span>
+                                    <form method="get" class="subscribeForm">
+                                        <input id="subscribe" type="text" />
+                                        <input type="submit" id="submitButton" />
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="more-info">
+                                    <br>
+                                    <h4 class="footer-title">Reach Us</h4>
+                                    <ul>
+                                        <li><i class="fa fa-phone"></i>+91 9876-543-210</li>
+                                        <li><i class="fa fa-globe"></i>123 Django Lane, Atlantis</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <br><p>&copy; Free to <a>Copy, Modify and Redistribute</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+    
+        <script src="/static/js/vendor/jquery-1.11.0.min.js"></script>
+        <script src="/static/js/vendor/jquery.gmap3.min.js"></script>
+        <script src="/static/js/plugins.js"></script>
+        <script src="/static/js/bootstrap.js"></script>
+        <script src="/static/js/main.js"></script>
+        <script src="/static/js/order.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="UTF-8">
+        <title>Material Design Login Form</title>
+
+        <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <link rel="stylesheet" href="/static/css/font-awesome.css">
+        <link rel="stylesheet" href="/static/css/templatemo_style.css">
+        <link rel="stylesheet" href="/static/css/login.css">
+
+        <script src="/static/js/vendor/jquery-1.11.0.min.js"></script>
+        <script src="/static/js/login.js"></script>
+    </head>
+
+    <body>
+        {% csrf_token %}
+        <header>
+            <div id="main-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="logo">
+                                <a href="#"><img src="/static/images/logo.png" title="Grill Template" alt="Grill Website Template" ></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="main-menu">
+                                <ul>
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="/Order">Order Online</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <hgroup>
+            <h1>Login</h1>
+        </hgroup>
+
+        <div class="login-container">
+            <div class="group">
+                <input type="text" placeholder="User Name" class="username">
+            </div>
+            <div class="group">
+                <input type="password" placeholder="Password" required class="password">
+            </div>
+
+            <button type="button" class="button buttonBlue login">Login
+                <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+            </button>
+        </div>
+    </body>
+</html>

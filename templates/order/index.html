@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!-- 
+
+Grill Template 
+
+http://www.templatemo.com/free-website-templates/417-grill
+
+-->
+    <head>
+        <meta charset="utf-8">
+        <title>Products - Grill Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        
+        <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>-->
+
+        <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <link rel="stylesheet" href="/static/css/font-awesome.css">
+        <link rel="stylesheet" href="/static/css/templatemo_style.css">
+        <link rel="stylesheet" href="/static/css/templatemo_misc.css">
+        <link rel="stylesheet" href="/static/css/flexslider.css">
+        <link rel="stylesheet" href="/static/css/testimonails-slider.css">
+
+        <script src="/static/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+
+            <header>
+                <div id="main-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="logo">
+                                    <a href="#"><img src="/static/images/logo.png" title="Grill Template" alt="Grill Website Template" ></a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="main-menu">
+                                    <ul>
+                                        <li><a href="/">Home</a></li>
+                                        <li><a class="nav-current">Order Online</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                {% if userid is None %}
+                                    <div class="login">
+                                        <a href="/User/Login">Login</a> | <a href="/User/Register">Register</a>
+                                    </div>
+                                {% else %}
+                                    <div class="checkout-container">
+                                        <div class="dropdown cart-container">
+                                            <button class="dropdown-toggle cart" data-toggle="dropdown">Cart <span class="quantity">0</span><span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                                <li class="no-items">No Items in cart</li>
+                                                <li class="divider"></li>
+                                                <li class="checkout-li"><button class="btn btn-primary checkout">Checkout</button></li>
+                                            </ul>
+                                        </div>
+                                        <a class="my-orders" href="/Order/MyOrders/">My Orders</a>
+                                        <a class="logout" href="/User/Logout/">Logout</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uname">{{request.session.username}}</div>
+            </header>
+
+            <div id="products-post">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="product-heading">
+                                <br><br>
+                                <h2>Hungry ?</h2>
+                                <img src="/static/images/under-heading.png" alt="" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="filters col-md-12 col-xs-12">
+                            <ul id="filters" class="clearfix">
+                                <li><span class="filter" data-filter="all">All</span></li>
+
+                                {% for category in categories %}
+                                    <li><span class="filter" data-filter=".{{ category.menu_category }}">{{ category.menu_category }}</span></li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row" id="Container">
+                        {% for menu in menus %}
+                            <div class="col-md-3 col-sm-6 mix portfolio-item {{ menu.menu_category }}">
+                                <input class="menuid" type="hidden" value="{{ menu.menuid }}"/>
+                                <div class="portfolio-wrapper">
+                                    <div class="portfolio-thumb">
+                                        <img class="menu-img" src="/static/images/menu/{{ menu.menuid }}.jpg" alt="" />
+                                        <div class="hover">
+                                            <div class="hover-iner">
+                                                <a class="fancybox" href="/static/images/menu/{{ menu.menuid }}.jpg"><img src="/static/images/open-icon.png" alt="" /></a>
+                                                <span class="menu-name">{{ menu.menu_name }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="label-text">
+                                        <h3><a>{{ menu.menu_name }}</a></h3>
+                                        <span class="text-category price">₹ {{ menu.price }}</span>
+                                        <span class="quantity-container">
+                                            <input type="button" class="minus" value="-">
+                                            <span class="quantity">0</span>
+                                            <input type="button" class="plus" value="+">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+
+
+			<footer>
+                <div class="container">
+                    <div class="top-footer">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="subscribe-form">
+                                    <span>Get in touch with us</span>
+                                    <form method="get" class="subscribeForm">
+                                        <input id="subscribe" type="text" />
+                                        <input type="submit" id="submitButton" />
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="more-info">
+                                    <br>
+                                    <h4 class="footer-title">Reach Us</h4>
+                                    <ul>
+                                        <li><i class="fa fa-phone"></i>+91 9876-543-210</li>
+                                        <li><i class="fa fa-globe"></i>123 Django Lane, Atlantis</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <br><p>&copy; Free to <a>Copy, Modify and Redistribute</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+    
+        <script src="/static/js/vendor/jquery-1.11.0.min.js"></script>
+        <script src="/static/js/vendor/jquery.gmap3.min.js"></script>
+        <script src="/static/js/plugins.js"></script>
+        <script src="/static/js/bootstrap.js"></script>
+        <script src="/static/js/main.js"></script>
+        <script src="/static/js/order.js"></script>
+
+    </body>
+</html>

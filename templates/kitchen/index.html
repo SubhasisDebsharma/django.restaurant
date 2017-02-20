@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Kitchen</title>
+
+	<link rel="stylesheet" href="/static/css/bootstrap.css">
+	<link rel="stylesheet" href="/static/css/font-awesome.css">
+	<link rel="stylesheet" href="/static/css/kitchen.css">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					<li class="active"><a href="#">Orders <span class="sr-only">(current)</span></a></li>
+				</ul>
+
+				<ul class="nav nav-sidebar">
+					<li><a href="/User/Logout/">Logout</a></li>
+				</ul>
+			</div>
+
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div class="table-responsive table-orders">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Phone</th>
+								<th>Address</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for orderitem in orderitems  %}
+							{% with forloop.counter as serial %}
+							{% for order in orderitem|slice:"1"%}
+							<tr class='clickablerow' data-href='{{ order.orderid.orderid }}'>
+								<td><span class="serial-no">{{ serial }}</span></td>
+								<td><span class="name">{{ order.orderid.userid.name }}</span></td>
+								<td><span class="email">{{ order.orderid.userid.email }}</span></td>
+								<td><span class="phone">{{ order.orderid.userid.phone }}</span></td>
+								<td><span class="address">{{ order.orderid.userid.address }}</span></td>
+								<td>
+									<span class="status">{{ order.orderid.get_status_display }}</span>
+									{% if order.orderid.status == order.orderid.ORDER_STATUS_PREPARING %}
+										<span class="btn btn-warning out-for-delivery">Out For Delivery</span>
+										<span class="btn btn-info delivered" style="display : none">Delivered</span>
+									{% elif order.orderid.status == order.orderid.ORDER_STATUS_READY %}
+										<span class="btn btn-info delivered">Delivered</span>
+									{% endif %}
+									<input type="hidden" class="orderid" value="{{ order.orderid.orderid }}"/>
+								</td>
+							</tr>
+							<tr class="hidden_div" data-order-details-id="{{ order.orderid.orderid }}">
+								<td colspan='6'>
+									<div class="table-responsive table-order-items">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th>Order Item</th>
+													<th>Quantity</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+							{% endfor %}
+							{% endwith %}
+							{% for order in orderitem%}
+												<tr>
+													<td><span class="order-item">{{order.menuid.menu_name}}</span></td>
+													<td><span class="status">{{order.quantity}}</span></td>
+													<td><span class="status">₹ {{order.price}}</span></td>
+												</tr>
+							{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/static/js/vendor/jquery-1.11.0.min.js"></script>
+	<script src="/static/js/bootstrap.js"></script>
+	<script src="/static/js/kitchen.js"></script>
+
+</body>
+</html>

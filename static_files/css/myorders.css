@@ -1,0 +1,35 @@
+#Container {
+    margin-top: 150px;
+}
+
+.table-orders {
+    border: 1px solid #e5e5e5;
+}
+
+.table-orders td, .table-orders th {
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+}
+
+.table-order-items {
+    border: 1px solid #e5e5e5;
+}
+
+.table-order-items tr td:last-child, .table-order-items tr th:last-child,
+.table-order-items tr td:nth-child(2), .table-order-items tr th:nth-child(2) {
+    width: 250px;
+    text-align: center;
+}
+
+.table-order-items td, .table-order-items th {
+    text-align: left;
+    vertical-align: middle !important;
+}
+
+.status, .serial-no {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
